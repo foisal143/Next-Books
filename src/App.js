@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Navbar from './components/Navbar/Navbar';
+import { Outlet } from 'react-router-dom';
+import Footer from './components/Footer/Footer';
+import { useNavigation } from 'react-router-dom';
+import Spinar from './components/Spinar';
 
-function App() {
+const App = () => {
+  const navigation = useNavigation();
+  if (navigation.state === 'loading') {
+    return <Spinar></Spinar>;
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar></Navbar>
+      <div className=" min-h-[calc(100vh-145px)]">
+        <Outlet></Outlet>
+      </div>
+      <Footer></Footer>
+    </>
   );
-}
+};
 
 export default App;
